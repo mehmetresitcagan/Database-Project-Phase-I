@@ -1,0 +1,115 @@
+\documentclass[12 pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\title{\textbf{\textit{HOUSEHOLD DATASET}}}
+\author{}
+\date{November 24,2022}
+
+
+\begin{document}
+\begin{figure}[t]
+    \centering
+    \includegraphics[scale=0.42]{filipinbayrak.jpg}
+    \label{fig:my_label}
+\end{figure}
+\maketitle
+\begin{center}
+\begin{huge}
+\underline{\textbf{Team Members}}
+\end{huge}
+\end{center}
+
+\begin{large}
+\begin{center}
+\begin{large}Mehmet Reşit ÇAĞAN     190709045\\ \end{large}
+\begin{large}Ali DİKME              180702012.1\\  \end{large}
+\begin{large} Murat Avzet ASAN        200709602\\ \end{large}
+\end{center}
+\end{large}
+\newpage
+
+\begin{large}
+\textbf{\section{Purpose of Project}}
+ \begin{large} 
+ 
+ Investigating specific expenditures of households in Philippines how relates on features of family using by “Household Dataset”.
+\bigbreak\bigbreak\bigbreak
+\section{Dataset Includes}
+\bigbreak 3 files, totally 81 columns and  15 strings in dataset
+\bigbreak Family\_info.csv: \href{https://www.kaggle.com/datasets/muhammadsaadkag/household-data-set?select=family\_info.csv}{Click to redirect Kaggle}\\\bigbreak
+House\_utilities.csv: \href{https://www.kaggle.com/datasets/muhammadsaadkag/household-data-set?select=house\_utilities.csv}{Click to redirect Kaggle}\\\bigbreak
+Household expenses: \href{https://www.kaggle.com/datasets/muhammadsaadkag/household-data-set?select=household\_expenses.csv}{Click to redirect Kaggle}\\\bigbreak
+
+\section{Questions About Dataset}
+\subsection{How many household head have of no job/with job (business indicator)?}
+\subsection{Which households have income below the average and the number of vehicles above the average?}
+\subsection{What is the rate of single family/extended family ?}
+\subsection{What is the average number of family members ?}
+\subsection{What is the rate of the members who under 5 ages/who between 5-17 ages ?}
+\subsection{What is the mean of the family members number who has a job ?}
+\subsection{What is the maximum education care expenditure ?}
+\subsection{Which houses are priced above the average house price?}
+\subsection{Which family has the least education expenses?}
+\subsection{What is the mean of bread and cereals expenditure?}
+\bigbreak
+\bigbreak
+\bigbreak
+\section{ER Diagram Link}
+\bigbreak \href{https://github.com/mehmetresitcagan/Database-Project-Phase-I}{Click here to see ER diagram}
+\newpage
+\section{SQL Statements}
+\subsection{What is the maximum education care expenditure?}\bigbreak
+\noindent\textbf{select} max(education)\\
+	\textbf{from} other\_expenditure;\\
+\subsection{What is the mean of bread and cereals expenditure?}\bigbreak
+\noindent\textbf{select} avg(bread\_and\_cereals)\\
+	               \textbf{from} food\_expenditures;\\
+ \subsection{Which households have income below the average and the number of vehicles above the average?}\bigbreak
+ \noindent\textbf{select} id,household\_income, vehicles.sum(count(*))\\
+\textbf{from} financial\_features,vehicles\\
+\textbf{where }household\_income $<$ mean(household\_income) in (\\
+\textbf{select} id, sum(count(*))\\
+\textbf{from} vehicles\\
+\textbf{where} sum(count(*)) $>$ mean(sum(count(*)))\\
+);\\
+\newpage
+\subsection{How many household head have no job/with job (business indicator)?}
+\noindent\textbf{select count}(head\_job\_or\_business\_indicator), head\_job\_or\_business\_indicator\\
+\textbf{from} household\_head\\
+\textbf{group by} head\_job\_or\_business\_indicator; \\
+
+\subsection{What is the average number of family members ?}\bigbreak
+\noindent\textbf{select avg}(number\_of\_members)\\ 
+\noindent\textbf{as } FamilyMemberCountAverage\\ \textbf{from} family;
+
+\bigbreak\bigbreak\bigbreak
+\section{Loading Database With Values}
+\bigbreak 
+We got our data from Kaggle. After the database setup, we will add data with the help of the front-end. We will take form-based input in the front-end part.
+
+The trouble we may experience here will be the front end of the data operations. The data will be corrected and optimized in the front end. This will bring an extra workload.
+
+Data will be added to the database with the help of an ORM(Entity Framework) via an API that works on the front-end and back end we have written.
+
+\newpage
+\section{Front-End User Interface}
+\bigbreak
+We will implement front-end to get data from the user.We will use Blazor in order to write a MVC application. The technologies we will be using are HTML, CSS, JS, C\# and .NET framework.
+
+\bigbreak\bigbreak\bigbreak
+\section{Database Platform and Challenging Issues}
+\bigbreak 
+We plan to use MySQL 8.0.31.CE on our home computer Apple M1 processor 8 GB of memory.
+
+One of the issues we will be facing is to implement front-end user interface. 
+
+We did start splitting .csv files with R and will be finished after ER diagram will be approved. The issue here will be using regex to split compound variables to atomic. Because, all of team members are new to Regular Expression.
+
+\end{large}
+\end{large}
+
+
+\end{document}
